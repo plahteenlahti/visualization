@@ -454,7 +454,7 @@ export const query = graphql`
 `;
 
 const ChartContainer = styled.div`
-  height: 90vh;
+  height: 75vh;
   min-height: 800px;
   width: 100%;
 `;
