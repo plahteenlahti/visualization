@@ -25,7 +25,7 @@ export const Point: FC<Props> = ({
   const theme = useContext(ThemeContext);
 
   return (
-    <g transform={`translate(${x}, ${y})`} style={{ pointerEvents: "none" }}>
+    <g transform={`translate(${x}, ${y})`}>
       <circle
         r={(size + borderWidth) / 2}
         cy={size / 5}
@@ -33,17 +33,12 @@ export const Point: FC<Props> = ({
       />
       <circle
         r={size / 2}
-        fill={theme.colors.background}
+        fill={theme.background}
         stroke={borderColor}
         strokeWidth={borderWidth}
       />
       {!isInactive && (
-        <text
-          textAnchor="middle"
-          y={4}
-          fill={theme.colors.text}
-          fontSize="11px"
-        >
+        <text textAnchor="middle" y={4} fill={theme.text} fontSize="10px">
           {Math.round(data.percentage)}%
         </text>
       )}
