@@ -1,12 +1,8 @@
 import { BumpInputSerie, ResponsiveBump } from "@nivo/bump";
 import { ascending, descending } from "d3-array";
 import { graphql, PageProps } from "gatsby";
-import React, { FC, useContext, useMemo, useState } from "react";
-import styled, {
-  createGlobalStyle,
-  ThemeContext,
-  ThemeProvider,
-} from "styled-components";
+import React, { FC, useMemo, useState } from "react";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Point } from "../components/Point";
 import { Tooltip } from "../components/Tooltip";
 import { darkTheme, lightTheme } from "../theme/themes";
@@ -114,8 +110,6 @@ const IndexPage: FC<PageProps<Props>> = ({ data }) => {
     undefined
   );
 
-  const theme = useContext(ThemeContext);
-
   const chartData: Serie[] = useMemo(
     () =>
       data.stateOfJS.survey[dataSet].experience.map((tool) => {
@@ -217,14 +211,22 @@ const IndexPage: FC<PageProps<Props>> = ({ data }) => {
 
             <Column>
               <Highlight>
-                <Info>{highlightedItem?.name}</Info>
-                <Info>{highlightedItem?.description}</Info>
-                <Info>{highlightedItem?.homepage}</Info>
-                <Info>Type: {highlightedItem?.type}</Info>
+                {!highlightedItem ? (
+                  <Info>Click to select and reveal more information</Info>
+                ) : (
+                  <>
+                    <Info>{highlightedItem?.name}</Info>
+                    <Info>{highlightedItem?.description}</Info>
+                    <Info>{highlightedItem?.homepage}</Info>
+                    <Info>Type: {highlightedItem?.category}</Info>
 
-                <Link href={highlightedItem?.github?.url}>Github</Link>
-                <Link href={highlightedItem?.github?.homepage}>Homepage</Link>
-                <Link href={highlightedItem?.npm}>{highlightedItem?.npm}</Link>
+                    <Link href={highlightedItem?.github?.url}>Github</Link>
+                    <Link href={highlightedItem?.github?.homepage}>
+                      Homepage
+                    </Link>
+                    <Link href={highlightedItem?.npm}>NPM</Link>
+                  </>
+                )}
               </Highlight>
             </Column>
           </Row>
@@ -233,10 +235,11 @@ const IndexPage: FC<PageProps<Props>> = ({ data }) => {
           {chartData && (
             <ResponsiveBump
               data={chartData}
-              margin={{ top: 40, right: 120, bottom: 40, left: 120 }}
+              margin={{ top: 40, right: 110, bottom: 20, left: 110 }}
               inactiveLineWidth={5}
               enableGridX={true}
               enableGridY={false}
+              theme={userTheme === "dark" ? darkTheme.chart : lightTheme.chart}
               colors={
                 userTheme === "dark" ? darkTheme.distinct : lightTheme.distinct
               }
@@ -258,11 +261,8 @@ const IndexPage: FC<PageProps<Props>> = ({ data }) => {
               pointComponent={Point}
               startLabelPadding={20}
               endLabel={(d) => d.name}
-              endLabelTextColor={{
-                from: "red",
-              }}
               endLabelPadding={20}
-              onClick={(serie: Serie) => setHightlightedItem(serie.entity)}
+              onMouseEnter={(serie: Serie) => setHightlightedItem(serie.entity)}
               lineWidth={5}
               pointSize={32}
               activeLineWidth={8}
@@ -454,7 +454,8 @@ export const query = graphql`
 `;
 
 const ChartContainer = styled.div`
-  height: 800px;
+  height: 90vh;
+  min-height: 800px;
   width: 100%;
 `;
 
@@ -481,7 +482,7 @@ const Option = styled.div<OptionProps>`
 const Configuration = styled.div`
   max-width: 1440px;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 0rem 1rem 1rem;
 `;
 
 const OrdersContainer = styled.div`

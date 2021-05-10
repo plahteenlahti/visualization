@@ -19,5 +19,31 @@ declare module "styled-components" {
     barChartDefaultColor: string;
     stroke: string;
     distinct: string[];
+
+    chart: {
+      background: string;
+      textColor: string;
+      fontSize: number;
+      axis: {
+        domain: {
+          line: {
+            stroke: string;
+            strokeWidth: number;
+          };
+        };
+        ticks: {
+          line: {
+            stroke: string;
+            strokeWidth: number;
+          };
+        };
+      };
+      grid: {
+        line: {
+          stroke: string;
+          strokeWidth: number;
+        };
+      };
+    };
   }
 }

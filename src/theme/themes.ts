@@ -31,6 +31,32 @@ export const darkTheme: DefaultTheme = {
     colors.skyblue,
     colors.purple,
   ],
+
+  chart: {
+    background: colors.greyDarker,
+    textColor: colors.greyLight,
+    fontSize: 12,
+    axis: {
+      domain: {
+        line: {
+          stroke: colors.greyLight,
+          strokeWidth: 0,
+        },
+      },
+      ticks: {
+        line: {
+          stroke: colors.greyLight,
+          strokeWidth: 0,
+        },
+      },
+    },
+    grid: {
+      line: {
+        stroke: colors.greyLight,
+        strokeWidth: 1,
+      },
+    },
+  },
 };
 
 export const lightTheme: DefaultTheme = {
@@ -51,4 +77,30 @@ export const lightTheme: DefaultTheme = {
   barChartDefaultColor: colors.red,
   stroke: colors.greyMediumest,
   distinct: ["#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600"],
+
+  chart: {
+    background: colors.greyLight,
+    textColor: colors.greyDarker,
+    fontSize: 12,
+    axis: {
+      domain: {
+        line: {
+          stroke: colors.greyDarker,
+          strokeWidth: 0,
+        },
+      },
+      ticks: {
+        line: {
+          stroke: colors.greyDarker,
+          strokeWidth: 0,
+        },
+      },
+    },
+    grid: {
+      line: {
+        stroke: colors.greyDarker,
+        strokeWidth: 1,
+      },
+    },
+  },
 };
