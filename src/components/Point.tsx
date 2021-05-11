@@ -28,14 +28,14 @@ export const Point: FC<Props> = ({
     <g transform={`translate(${x}, ${y})`}>
       <circle
         r={(size + borderWidth) / 2}
-        cy={size / 5}
         fill="rgba(0, 0, 0, .2)"
+        cy={size / 5}
       />
       <circle
         r={size / 2}
+        strokeWidth={borderWidth}
         fill={theme.background}
         stroke={borderColor}
-        strokeWidth={borderWidth}
       />
       {!isInactive && (
         <text textAnchor="middle" y={4} fill={theme.text} fontSize="10px">
